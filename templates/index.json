@@ -1,0 +1,152 @@
+{
+  "sections": {
+    "thrivve_hero": {
+      "type": "thrivve-hero",
+      "blocks": {
+        "stat_1": {
+          "type": "stat",
+          "settings": { "number": "94%", "label": "Reported visible results" }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": { "number": "10 MIN", "label": "Per day" }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": { "number": "FDA", "label": "Cleared wavelengths" }
+        }
+      },
+      "block_order": ["stat_1", "stat_2", "stat_3"],
+      "settings": {
+        "eyebrow": "660NM + 850NM RED LIGHT THERAPY",
+        "heading": "Stronger hair starts with light.",
+        "subheading": "Clinical-grade red and near-infrared light therapy, built into a cap you wear for 10 minutes a day. No clinic visits. No chemicals.",
+        "button_label": "Shop the cap",
+        "button_link": "shopify://collections/all",
+        "secondary_label": "How it works",
+        "secondary_link": "#mechanism"
+      }
+    },
+    "thrivve_mechanism": {
+      "type": "thrivve-mechanism",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": { "title": "Wavelengths", "description": "660nm red and 850nm near-infrared LEDs penetrate the scalp at different depths to reach the dermal papilla." }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": { "title": "Absorption", "description": "Light energy is absorbed by mitochondria in scalp cells, increasing ATP (cellular energy) production." }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": { "title": "Stimulation", "description": "Increased cellular energy supports follicles in the anagen (growth) phase and improves local circulation." }
+        }
+      },
+      "block_order": ["step_1", "step_2", "step_3"],
+      "settings": {
+        "eyebrow": "THE SCIENCE",
+        "heading": "How red light reaches the follicle",
+        "description": "Red and near-infrared light penetrate the scalp and absorb into cellular mitochondria, increasing ATP production. More cellular energy at the follicle supports the hair growth cycle."
+      }
+    },
+    "thrivve_bundles": {
+      "type": "thrivve-bundles",
+      "blocks": {
+        "tier_1": {
+          "type": "bundle",
+          "settings": {
+            "name": "Single Cap",
+            "price": "$79.99",
+            "subtext": "One Thrivve Red Light Cap",
+            "features": "660nm + 850nm LEDs\n10-minute daily sessions\nFree US shipping\n1-year warranty",
+            "button_label": "Shop now",
+            "link": "shopify://collections/all"
+          }
+        },
+        "tier_2": {
+          "type": "bundle",
+          "settings": {
+            "tag": "Most popular",
+            "featured": true,
+            "name": "Duo Pack",
+            "price": "$139.99",
+            "compare_price": "$159.98",
+            "subtext": "Two caps — share or save as backup",
+            "features": "Everything in Single\nSave 12% vs. buying twice\nFree US shipping\n1-year warranty",
+            "button_label": "Shop the duo",
+            "link": "shopify://collections/all"
+          }
+        },
+        "tier_3": {
+          "type": "bundle",
+          "settings": {
+            "tag": "Best value",
+            "name": "Family Pack",
+            "price": "$199.99",
+            "compare_price": "$239.97",
+            "subtext": "Three caps for the whole household",
+            "features": "Everything in Single\nSave 17% vs. buying separately\nFree US shipping\n1-year warranty",
+            "button_label": "Shop the family pack",
+            "link": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": ["tier_1", "tier_2", "tier_3"],
+      "settings": {
+        "eyebrow": "CHOOSE YOUR PLAN",
+        "heading": "More caps. Bigger savings.",
+        "description": "Stock up, share with a partner, or stay consistent for the long haul."
+      }
+    },
+    "thrivve_results": {
+      "type": "thrivve-results",
+      "blocks": {
+        "stat_1": { "type": "stat", "settings": { "number": "94%", "label": "Reported visible results" } },
+        "stat_2": { "type": "stat", "settings": { "number": "12 WKS", "label": "Avg. time to notice change" } },
+        "stat_3": { "type": "stat", "settings": { "number": "10 MIN", "label": "Daily session length" } },
+        "stat_4": { "type": "stat", "settings": { "number": "30 DAY", "label": "Money-back guarantee" } }
+      },
+      "block_order": ["stat_1", "stat_2", "stat_3", "stat_4"],
+      "settings": {
+        "eyebrow": "RESULTS",
+        "heading": "What consistent use looks like"
+      }
+    },
+    "thrivve_testimonials": {
+      "type": "thrivve-testimonials",
+      "blocks": {
+        "t1": { "type": "testimonial", "settings": { "quote": "Started noticing less shedding around week 6. Genuinely surprised.", "author": "Verified buyer" } },
+        "t2": { "type": "testimonial", "settings": { "quote": "Easy to fit into my morning routine. Doesn't feel like a gimmick.", "author": "Verified buyer" } },
+        "t3": { "type": "testimonial", "settings": { "quote": "Bought the duo pack so my partner and I could both use it.", "author": "Verified buyer" } }
+      },
+      "block_order": ["t1", "t2", "t3"],
+      "settings": {
+        "eyebrow": "REAL USERS",
+        "heading": "Don't take our word for it"
+      }
+    },
+    "thrivve_faq": {
+      "type": "thrivve-faq",
+      "blocks": {
+        "f1": { "type": "faq", "settings": { "question": "How long until I see results?", "answer": "Most users report visible changes between 8-12 weeks of consistent daily use. Hair growth cycles are slow, so consistency matters more than intensity." } },
+        "f2": { "type": "faq", "settings": { "question": "How often should I use it?", "answer": "10 minutes per day is the recommended session length. The cap is designed for daily use." } },
+        "f3": { "type": "faq", "settings": { "question": "Is it safe?", "answer": "Yes. The cap uses low-level red and near-infrared light, the same wavelength ranges used in clinical red light therapy devices." } },
+        "f4": { "type": "faq", "settings": { "question": "Does it work for all hair types?", "answer": "Red light therapy works at the follicle level and is not specific to hair type. Results vary by individual." } }
+      },
+      "block_order": ["f1", "f2", "f3", "f4"],
+      "settings": {
+        "eyebrow": "QUESTIONS",
+        "heading": "Everything you need to know"
+      }
+    }
+  },
+  "order": [
+    "thrivve_hero",
+    "thrivve_mechanism",
+    "thrivve_bundles",
+    "thrivve_results",
+    "thrivve_testimonials",
+    "thrivve_faq"
+  ]
+}

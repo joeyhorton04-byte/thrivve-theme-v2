@@ -1,0 +1,234 @@
+{{ 'thrivve-tokens.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .tl-bundle__head {
+    text-align: center;
+    max-width: 56rem;
+    margin: 0 auto 5.2rem;
+  }
+
+  .tl-bundle__head .tl-eyebrow {
+    justify-content: center;
+  }
+
+  .tl-bundle__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.4rem;
+  }
+
+  @media screen and (min-width: 900px) {
+    .tl-bundle__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .tl-bundle__card {
+    position: relative;
+    background: var(--tl-near-black);
+    border: 1px solid var(--tl-border);
+    border-radius: 6px;
+    padding: 3.6rem 3rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tl-bundle__card--featured {
+    border-color: var(--tl-red);
+    background: linear-gradient(160deg, var(--tl-near-black) 0%, #200a08 100%);
+    transform: translateY(-1.2rem);
+  }
+
+  @media screen and (max-width: 899px) {
+    .tl-bundle__card--featured {
+      transform: none;
+    }
+  }
+
+  .tl-bundle__tag {
+    position: absolute;
+    top: -1.2rem;
+    left: 3rem;
+    background: var(--tl-red);
+    color: var(--tl-white);
+    font-family: var(--tl-font-body);
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.5rem 1.2rem;
+    border-radius: 100px;
+  }
+
+  .tl-bundle__name {
+    font-family: var(--tl-font-display);
+    font-weight: 700;
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--tl-gray-light);
+    margin-bottom: 1.2rem;
+  }
+
+  .tl-bundle__price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .tl-bundle__price {
+    font-family: var(--tl-font-display);
+    font-weight: 800;
+    font-size: 3.8rem;
+    color: var(--tl-white);
+  }
+
+  .tl-bundle__compare {
+    font-family: var(--tl-font-body);
+    font-size: 1.6rem;
+    color: var(--tl-gray-light);
+    text-decoration: line-through;
+  }
+
+  .tl-bundle__per-unit {
+    font-family: var(--tl-font-body);
+    font-size: 1.3rem;
+    color: var(--tl-gray-light);
+    margin-bottom: 2.8rem;
+  }
+
+  .tl-bundle__list {
+    list-style: none;
+    margin: 0 0 3.2rem;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    flex-grow: 1;
+  }
+
+  .tl-bundle__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    font-family: var(--tl-font-body);
+    font-size: 1.45rem;
+    color: rgba(250, 250, 250, 0.78);
+  }
+
+  .tl-bundle__list .tl-dot {
+    margin-top: 0.8rem;
+  }
+
+  .tl-bundle__card .tl-btn {
+    width: 100%;
+  }
+</style>
+
+<div class="tl-section tl-section--black">
+  <div class="tl-container">
+    <div class="tl-bundle__head">
+      <span class="tl-eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2 class="tl-heading tl-heading--lg" style="margin-bottom: 1.6rem;">{{ section.settings.heading }}</h2>
+      <p class="tl-body">{{ section.settings.description }}</p>
+    </div>
+
+    <div class="tl-bundle__grid">
+      {% for block in section.blocks %}
+        <div class="tl-bundle__card{% if block.settings.featured %} tl-bundle__card--featured{% endif %}">
+          {% if block.settings.tag != blank %}
+            <span class="tl-bundle__tag">{{ block.settings.tag }}</span>
+          {% endif %}
+          <span class="tl-bundle__name">{{ block.settings.name }}</span>
+          <div class="tl-bundle__price-row">
+            <span class="tl-bundle__price">{{ block.settings.price }}</span>
+            {% if block.settings.compare_price != blank %}
+              <span class="tl-bundle__compare">{{ block.settings.compare_price }}</span>
+            {% endif %}
+          </div>
+          <span class="tl-bundle__per-unit">{{ block.settings.subtext }}</span>
+          <ul class="tl-bundle__list">
+            {% assign features = block.settings.features | newline_to_br | split: '<br />' %}
+            {% for feature in features %}
+              {% if feature != blank %}
+                <li><span class="tl-dot"></span>{{ feature | strip }}</li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+          <a href="{{ block.settings.link }}" class="tl-btn {% if block.settings.featured %}tl-btn--red{% else %}tl-btn--outline-light{% endif %}">{{ block.settings.button_label }}</a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Thrivve Bundles",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "CHOOSE YOUR PLAN" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "More caps. Bigger savings." },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "Stock up, share with a partner, or stay consistent for the long haul." }
+  ],
+  "blocks": [
+    {
+      "type": "bundle",
+      "name": "Bundle tier",
+      "settings": [
+        { "type": "text", "id": "tag", "label": "Tag (optional)" },
+        { "type": "checkbox", "id": "featured", "label": "Highlight this tier", "default": false },
+        { "type": "text", "id": "name", "label": "Tier name", "default": "Single Cap" },
+        { "type": "text", "id": "price", "label": "Price", "default": "$79.99" },
+        { "type": "text", "id": "compare_price", "label": "Compare-at price" },
+        { "type": "text", "id": "subtext", "label": "Subtext", "default": "One Thrivve Red Light Cap" },
+        { "type": "textarea", "id": "features", "label": "Features (one per line)", "default": "660nm + 850nm LEDs\n10-minute daily sessions\nFree US shipping" },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop now" },
+        { "type": "url", "id": "link", "label": "Button link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Thrivve Bundles",
+      "blocks": [
+        {
+          "type": "bundle",
+          "settings": {
+            "name": "Single Cap",
+            "price": "$79.99",
+            "subtext": "One Thrivve Red Light Cap",
+            "features": "660nm + 850nm LEDs\n10-minute daily sessions\nFree US shipping\n1-year warranty",
+            "button_label": "Shop now"
+          }
+        },
+        {
+          "type": "bundle",
+          "settings": {
+            "tag": "Most popular",
+            "featured": true,
+            "name": "Duo Pack",
+            "price": "$139.99",
+            "compare_price": "$159.98",
+            "subtext": "Two caps — share or save as backup",
+            "features": "Everything in Single\nSave 12% vs. buying twice\nFree US shipping\n1-year warranty",
+            "button_label": "Shop the duo"
+          }
+        },
+        {
+          "type": "bundle",
+          "settings": {
+            "tag": "Best value",
+            "name": "Family Pack",
+            "price": "$199.99",
+            "compare_price": "$239.97",
+            "subtext": "Three caps for the whole household",
+            "features": "Everything in Single\nSave 17% vs. buying separately\nFree US shipping\n1-year warranty",
+            "button_label": "Shop the family pack"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

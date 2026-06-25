@@ -1,0 +1,277 @@
+/* ==========================================================================
+   THRIVVE LABS — DESIGN TOKENS
+   Black / White / Signal Red — built around the literal wavelength concept
+   of red light therapy. Red is used as a single, disciplined accent.
+   ========================================================================== */
+
+:root {
+  --tl-black: #0a0a0a;
+  --tl-near-black: #1a1a1a;
+  --tl-white: #fafafa;
+  --tl-off-white: #f1f0ed;
+  --tl-red: #e8281c;
+  --tl-red-dim: #8c1812;
+  --tl-gray: #6b6b6b;
+  --tl-gray-light: #a8a8a8;
+  --tl-border: rgba(255, 255, 255, 0.12);
+  --tl-border-dark: rgba(0, 0, 0, 0.1);
+
+  --tl-font-display: var(--font-heading-family), Arial, sans-serif;
+  --tl-font-body: var(--font-body-family), Arial, sans-serif;
+
+  --tl-tracking-wide: 0.14em;
+  --tl-tracking-tight: -0.01em;
+}
+
+/* Archivo (display) + Inter (body) are loaded natively via Shopify's
+   font picker (set in theme settings) — no external @import needed. */
+
+.tl-section {
+  position: relative;
+  padding: 6rem 0;
+}
+
+@media screen and (max-width: 749px) {
+  .tl-section {
+    padding: 4rem 0;
+  }
+}
+
+.tl-section--black {
+  background: var(--tl-black);
+  color: var(--tl-white);
+}
+
+.tl-section--white {
+  background: var(--tl-white);
+  color: var(--tl-black);
+}
+
+.tl-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 4rem;
+}
+
+@media screen and (max-width: 749px) {
+  .tl-container {
+    padding: 0 2rem;
+  }
+}
+
+.tl-eyebrow {
+  font-family: var(--tl-font-body);
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: var(--tl-tracking-wide);
+  text-transform: uppercase;
+  color: var(--tl-red);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1.6rem;
+}
+
+.tl-eyebrow::before {
+  content: '';
+  width: 16px;
+  height: 2px;
+  background: var(--tl-red);
+  display: inline-block;
+}
+
+.tl-heading {
+  font-family: var(--tl-font-display);
+  font-weight: 700;
+  letter-spacing: var(--tl-tracking-tight);
+  line-height: 1.05;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.tl-heading--xl {
+  font-size: clamp(3.6rem, 7vw, 7.2rem);
+}
+
+.tl-heading--lg {
+  font-size: clamp(2.8rem, 4.5vw, 4.8rem);
+}
+
+.tl-heading--md {
+  font-size: clamp(2rem, 2.6vw, 2.8rem);
+}
+
+.tl-body {
+  font-family: var(--tl-font-body);
+  font-weight: 400;
+  font-size: 1.7rem;
+  line-height: 1.6;
+  letter-spacing: 0;
+}
+
+.tl-section--black .tl-body {
+  color: rgba(250, 250, 250, 0.72);
+}
+
+.tl-section--white .tl-body {
+  color: rgba(10, 10, 10, 0.68);
+}
+
+/* Signature element: pulsing wavelength line */
+.tl-wavelength {
+  position: relative;
+  height: 2px;
+  width: 100%;
+  background: var(--tl-border);
+  overflow: hidden;
+  margin: 0;
+}
+
+.tl-section--white .tl-wavelength {
+  background: var(--tl-border-dark);
+}
+
+.tl-wavelength::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -30%;
+  width: 30%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--tl-red), transparent);
+  animation: tl-pulse 3.2s ease-in-out infinite;
+}
+
+@keyframes tl-pulse {
+  0% { left: -30%; }
+  100% { left: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tl-wavelength::after {
+    animation: none;
+    left: 0;
+    width: 100%;
+    opacity: 0.4;
+  }
+}
+
+.tl-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-family: var(--tl-font-body);
+  font-weight: 600;
+  font-size: 1.4rem;
+  letter-spacing: var(--tl-tracking-wide);
+  text-transform: uppercase;
+  padding: 1.7rem 3.6rem;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.tl-btn:hover {
+  transform: translateY(-1px);
+}
+
+.tl-btn--red {
+  background: var(--tl-red);
+  color: var(--tl-white);
+}
+
+.tl-btn--red:hover {
+  background: #ff3823;
+}
+
+.tl-btn--outline-light {
+  background: transparent;
+  color: var(--tl-white);
+  border-color: rgba(250, 250, 250, 0.35);
+}
+
+.tl-btn--outline-light:hover {
+  border-color: var(--tl-white);
+}
+
+.tl-btn--outline-dark {
+  background: transparent;
+  color: var(--tl-black);
+  border-color: rgba(10, 10, 10, 0.3);
+}
+
+.tl-btn--outline-dark:hover {
+  border-color: var(--tl-black);
+}
+
+.tl-grid {
+  display: grid;
+  gap: 4rem;
+}
+
+@media screen and (min-width: 750px) {
+  .tl-grid--2 {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .tl-grid--3 {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.tl-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.tl-stat__number {
+  font-family: var(--tl-font-display);
+  font-weight: 800;
+  font-size: clamp(3.2rem, 4vw, 4.8rem);
+  color: var(--tl-red);
+  line-height: 1;
+}
+
+.tl-stat__label {
+  font-family: var(--tl-font-body);
+  font-size: 1.3rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--tl-gray-light);
+}
+
+.tl-section--white .tl-stat__label {
+  color: var(--tl-gray);
+}
+
+.tl-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--tl-font-body);
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.6rem 1.4rem;
+  border: 1px solid var(--tl-border);
+  border-radius: 100px;
+  color: var(--tl-white);
+}
+
+.tl-section--white .tl-badge {
+  border-color: var(--tl-border-dark);
+  color: var(--tl-black);
+}
+
+.tl-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--tl-red);
+  flex-shrink: 0;
+}

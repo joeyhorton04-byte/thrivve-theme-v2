@@ -1,0 +1,128 @@
+{{ 'thrivve-tokens.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .tl-faq__layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+
+  @media screen and (min-width: 900px) {
+    .tl-faq__layout {
+      grid-template-columns: 0.8fr 1.2fr;
+    }
+  }
+
+  .tl-faq__head {
+    max-width: 40rem;
+  }
+
+  .tl-faq__item {
+    border-bottom: 1px solid var(--tl-border-dark);
+  }
+
+  .tl-faq__item summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2.2rem 0;
+    font-family: var(--tl-font-display);
+    font-weight: 700;
+    font-size: 1.7rem;
+    color: var(--tl-black);
+  }
+
+  .tl-faq__item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .tl-faq__icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    position: relative;
+  }
+
+  .tl-faq__icon::before,
+  .tl-faq__icon::after {
+    content: '';
+    position: absolute;
+    background: var(--tl-red);
+    transition: transform 0.2s ease;
+  }
+
+  .tl-faq__icon::before {
+    width: 100%;
+    height: 2px;
+    top: 9px;
+  }
+
+  .tl-faq__icon::after {
+    width: 2px;
+    height: 100%;
+    left: 9px;
+  }
+
+  .tl-faq__item[open] .tl-faq__icon::after {
+    transform: scaleY(0);
+  }
+
+  .tl-faq__answer {
+    padding-bottom: 2.2rem;
+  }
+</style>
+
+<div class="tl-section tl-section--white">
+  <div class="tl-container">
+    <div class="tl-faq__layout">
+      <div class="tl-faq__head">
+        <span class="tl-eyebrow">{{ section.settings.eyebrow }}</span>
+        <h2 class="tl-heading tl-heading--lg" style="color: var(--tl-black);">{{ section.settings.heading }}</h2>
+      </div>
+      <div>
+        {% for block in section.blocks %}
+          <details class="tl-faq__item">
+            <summary>
+              {{ block.settings.question }}
+              <span class="tl-faq__icon"></span>
+            </summary>
+            <div class="tl-faq__answer tl-body">{{ block.settings.answer }}</div>
+          </details>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Thrivve FAQ",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "QUESTIONS" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Everything you need to know" }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ item",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "How long until I see results?" },
+        { "type": "textarea", "id": "answer", "label": "Answer", "default": "Most users report visible changes between 8-12 weeks of consistent daily use. Hair growth cycles are slow, so consistency matters more than intensity." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Thrivve FAQ",
+      "blocks": [
+        { "type": "faq", "settings": { "question": "How long until I see results?", "answer": "Most users report visible changes between 8-12 weeks of consistent daily use. Hair growth cycles are slow, so consistency matters more than intensity." } },
+        { "type": "faq", "settings": { "question": "How often should I use it?", "answer": "10 minutes per day is the recommended session length. The cap is designed for daily use." } },
+        { "type": "faq", "settings": { "question": "Is it safe?", "answer": "Yes. The cap uses low-level red and near-infrared light, the same wavelength ranges used in clinical red light therapy devices." } },
+        { "type": "faq", "settings": { "question": "Does it work for all hair types?", "answer": "Red light therapy works at the follicle level and is not specific to hair type. Results vary by individual." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
