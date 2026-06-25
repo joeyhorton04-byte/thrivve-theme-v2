@@ -1,0 +1,192 @@
+{{ 'thrivve-tokens.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .tl-tiers {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+
+  .tl-tier {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.4rem;
+    border: 1px solid rgba(10,10,10,0.14);
+    border-radius: 6px;
+    padding: 1.6rem 1.8rem;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .tl-tier:hover {
+    border-color: rgba(232,40,28,0.4);
+  }
+
+  .tl-tier input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .tl-tier__radio {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid rgba(10,10,10,0.25);
+    margin-top: 0.2rem;
+    position: relative;
+    transition: border-color 0.15s ease;
+  }
+
+  .tl-tier__radio::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    background: var(--tl-red, #e8281c);
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+
+  .tl-tier input:checked ~ .tl-tier__radio {
+    border-color: var(--tl-red, #e8281c);
+  }
+
+  .tl-tier input:checked ~ .tl-tier__radio::after {
+    opacity: 1;
+  }
+
+  .tl-tier.is-selected {
+    border-color: var(--tl-red, #e8281c);
+    background: rgba(232,40,28,0.04);
+  }
+
+  .tl-tier__body {
+    flex: 1;
+  }
+
+  .tl-tier__top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .tl-tier__name {
+    font-family: var(--tl-font-display, sans-serif);
+    font-weight: 700;
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    letter-spacing: -0.005em;
+    color: var(--tl-black, #0a0a0a);
+  }
+
+  .tl-tier__price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    white-space: nowrap;
+  }
+
+  .tl-tier__price-now {
+    font-family: var(--tl-font-display, sans-serif);
+    font-weight: 800;
+    font-size: 1.8rem;
+    color: var(--tl-black, #0a0a0a);
+  }
+
+  .tl-tier__price-was {
+    font-family: var(--tl-font-body, sans-serif);
+    font-size: 1.3rem;
+    color: var(--tl-gray, #6b6b6b);
+    text-decoration: line-through;
+  }
+
+  .tl-tier__sub {
+    font-family: var(--tl-font-body, sans-serif);
+    font-size: 1.3rem;
+    color: var(--tl-gray, #6b6b6b);
+    margin: 0;
+  }
+
+  .tl-tier__badge {
+    position: absolute;
+    top: -0.9rem;
+    left: 1.8rem;
+    background: var(--tl-red, #e8281c);
+    color: #fff;
+    font-family: var(--tl-font-body, sans-serif);
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.35rem 1rem;
+    border-radius: 100px;
+  }
+</style>
+
+<div class="tl-tiers" data-tier-group>
+  <label class="tl-tier is-selected">
+    <input type="radio" name="tl-tier" value="single" checked>
+    <span class="tl-tier__radio"></span>
+    <span class="tl-tier__body">
+      <span class="tl-tier__top">
+        <span class="tl-tier__name">Single Cap</span>
+        <span class="tl-tier__price">
+          <span class="tl-tier__price-now">$79.99</span>
+          <span class="tl-tier__price-was">$134.99</span>
+        </span>
+      </span>
+      <p class="tl-tier__sub">One Thrivve Red Light Cap</p>
+    </span>
+  </label>
+
+  <label class="tl-tier" style="position: relative;">
+    <span class="tl-tier__badge">Most popular</span>
+    <input type="radio" name="tl-tier" value="duo">
+    <span class="tl-tier__radio"></span>
+    <span class="tl-tier__body">
+      <span class="tl-tier__top">
+        <span class="tl-tier__name">Duo Pack</span>
+        <span class="tl-tier__price">
+          <span class="tl-tier__price-now">$139.99</span>
+          <span class="tl-tier__price-was">$269.98</span>
+        </span>
+      </span>
+      <p class="tl-tier__sub">Two caps — share or save as backup</p>
+    </span>
+  </label>
+
+  <label class="tl-tier">
+    <input type="radio" name="tl-tier" value="family">
+    <span class="tl-tier__radio"></span>
+    <span class="tl-tier__body">
+      <span class="tl-tier__top">
+        <span class="tl-tier__name">Family Pack</span>
+        <span class="tl-tier__price">
+          <span class="tl-tier__price-now">$199.99</span>
+          <span class="tl-tier__price-was">$404.97</span>
+        </span>
+      </span>
+      <p class="tl-tier__sub">Three caps for the whole household</p>
+    </span>
+  </label>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('[data-tier-group] input[type="radio"]').forEach(function (input) {
+      input.addEventListener('change', function () {
+        document.querySelectorAll('[data-tier-group] .tl-tier').forEach(function (label) {
+          label.classList.remove('is-selected');
+        });
+        input.closest('.tl-tier').classList.add('is-selected');
+      });
+    });
+  });
+</script>
