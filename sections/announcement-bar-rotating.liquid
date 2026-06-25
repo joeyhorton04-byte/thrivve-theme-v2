@@ -1,0 +1,101 @@
+{{ 'section-announcement-bar-rotating.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign bar_bg = section.settings.bg_color
+  assign bar_text = section.settings.text_color
+  assign speed = section.settings.rotation_speed | default: 4
+-%}
+
+<div class="announcement-bar-rotating color-{{ section.settings.color_scheme }}" style="--ab-speed: {{ speed }}s;">
+  <div class="announcement-bar-rotating__track" role="region" aria-label="{{ 'sections.announcement_bar.label' | t: default: 'Announcement' }}">
+    <ul class="announcement-bar-rotating__list" data-ab-list>
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'message' -%}
+          <li class="announcement-bar-rotating__item" {{ block.shopify_attributes }}>
+            {%- if block.settings.link != blank -%}
+              <a href="{{ block.settings.link }}" class="announcement-bar-rotating__link">
+            {%- endif -%}
+
+            {%- if block.settings.icon != blank -%}
+              <span class="announcement-bar-rotating__icon" aria-hidden="true">{{ block.settings.icon }}</span>
+            {%- endif -%}
+
+            <span class="announcement-bar-rotating__text">{{ block.settings.text | escape }}</span>
+
+            {%- if block.settings.link != blank -%}
+              </a>
+            {%- endif -%}
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  </div>
+</div>
+
+<script src="{{ 'announcement-bar-rotating.js' | asset_url }}" defer="defer"></script>
+
+{% schema %}
+{
+  "name": "Rotating announcement bar",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "options": [
+        { "value": "scheme-1", "label": "Scheme 1" },
+        { "value": "scheme-2", "label": "Scheme 2" },
+        { "value": "scheme-3", "label": "Scheme 3" },
+        { "value": "accent-1", "label": "Accent 1 (red)" },
+        { "value": "inverse", "label": "Inverse" }
+      ],
+      "default": "accent-1"
+    },
+    {
+      "type": "range",
+      "id": "rotation_speed",
+      "label": "Seconds per message",
+      "min": 2,
+      "max": 10,
+      "step": 0.5,
+      "default": 4
+    }
+  ],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Message",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Message text",
+          "default": "Free worldwide shipping"
+        },
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (emoji, optional)",
+          "default": ""
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (optional)"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Rotating announcement bar",
+      "blocks": [
+        { "type": "message", "settings": { "text": "Free US shipping on every order" } },
+        { "type": "message", "settings": { "text": "30-day money-back guarantee" } },
+        { "type": "message", "settings": { "text": "Limited time: free worldwide shipping" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
