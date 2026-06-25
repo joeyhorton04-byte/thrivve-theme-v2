@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "thrivve_hero": {
@@ -5,22 +14,36 @@
       "blocks": {
         "stat_1": {
           "type": "stat",
-          "settings": { "number": "94%", "label": "Reported visible results" }
+          "settings": {
+            "number": "94%",
+            "label": "Reported visible results"
+          }
         },
         "stat_2": {
           "type": "stat",
-          "settings": { "number": "10 MIN", "label": "Per day" }
+          "settings": {
+            "number": "10 MIN",
+            "label": "Per day"
+          }
         },
         "stat_3": {
           "type": "stat",
-          "settings": { "number": "FDA", "label": "Cleared wavelengths" }
+          "settings": {
+            "number": "FDA",
+            "label": "Cleared wavelengths"
+          }
         }
       },
-      "block_order": ["stat_1", "stat_2", "stat_3"],
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3"
+      ],
       "settings": {
         "eyebrow": "660NM + 850NM RED LIGHT THERAPY",
         "heading": "Stronger hair starts with light.",
         "subheading": "Clinical-grade red and near-infrared light therapy, built into a cap you wear for 10 minutes a day. No clinic visits. No chemicals.",
+        "image": "shopify://shop_images/ChatGPTImageJun24_2026_04_35_04PM.png",
         "button_label": "Shop the cap",
         "button_link": "shopify://collections/all",
         "secondary_label": "How it works",
@@ -32,18 +55,31 @@
       "blocks": {
         "step_1": {
           "type": "step",
-          "settings": { "title": "Wavelengths", "description": "660nm red and 850nm near-infrared LEDs penetrate the scalp at different depths to reach the dermal papilla." }
+          "settings": {
+            "title": "Wavelengths",
+            "description": "660nm red and 850nm near-infrared LEDs penetrate the scalp at different depths to reach the dermal papilla."
+          }
         },
         "step_2": {
           "type": "step",
-          "settings": { "title": "Absorption", "description": "Light energy is absorbed by mitochondria in scalp cells, increasing ATP (cellular energy) production." }
+          "settings": {
+            "title": "Absorption",
+            "description": "Light energy is absorbed by mitochondria in scalp cells, increasing ATP (cellular energy) production."
+          }
         },
         "step_3": {
           "type": "step",
-          "settings": { "title": "Stimulation", "description": "Increased cellular energy supports follicles in the anagen (growth) phase and improves local circulation." }
+          "settings": {
+            "title": "Stimulation",
+            "description": "Increased cellular energy supports follicles in the anagen (growth) phase and improves local circulation."
+          }
         }
       },
-      "block_order": ["step_1", "step_2", "step_3"],
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ],
       "settings": {
         "eyebrow": "THE SCIENCE",
         "heading": "How red light reaches the follicle",
@@ -56,8 +92,11 @@
         "tier_1": {
           "type": "bundle",
           "settings": {
+            "tag": "",
+            "featured": false,
             "name": "Single Cap",
             "price": "$79.99",
+            "compare_price": "",
             "subtext": "One Thrivve Red Light Cap",
             "features": "660nm + 850nm LEDs\n10-minute daily sessions\nFree US shipping\n1-year warranty",
             "button_label": "Shop now",
@@ -82,6 +121,7 @@
           "type": "bundle",
           "settings": {
             "tag": "Best value",
+            "featured": false,
             "name": "Family Pack",
             "price": "$199.99",
             "compare_price": "$239.97",
@@ -92,7 +132,11 @@
           }
         }
       },
-      "block_order": ["tier_1", "tier_2", "tier_3"],
+      "block_order": [
+        "tier_1",
+        "tier_2",
+        "tier_3"
+      ],
       "settings": {
         "eyebrow": "CHOOSE YOUR PLAN",
         "heading": "More caps. Bigger savings.",
@@ -102,12 +146,41 @@
     "thrivve_results": {
       "type": "thrivve-results",
       "blocks": {
-        "stat_1": { "type": "stat", "settings": { "number": "94%", "label": "Reported visible results" } },
-        "stat_2": { "type": "stat", "settings": { "number": "12 WKS", "label": "Avg. time to notice change" } },
-        "stat_3": { "type": "stat", "settings": { "number": "10 MIN", "label": "Daily session length" } },
-        "stat_4": { "type": "stat", "settings": { "number": "30 DAY", "label": "Money-back guarantee" } }
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "number": "94%",
+            "label": "Reported visible results"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "number": "12 WKS",
+            "label": "Avg. time to notice change"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "number": "10 MIN",
+            "label": "Daily session length"
+          }
+        },
+        "stat_4": {
+          "type": "stat",
+          "settings": {
+            "number": "30 DAY",
+            "label": "Money-back guarantee"
+          }
+        }
       },
-      "block_order": ["stat_1", "stat_2", "stat_3", "stat_4"],
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3",
+        "stat_4"
+      ],
       "settings": {
         "eyebrow": "RESULTS",
         "heading": "What consistent use looks like"
@@ -116,11 +189,33 @@
     "thrivve_testimonials": {
       "type": "thrivve-testimonials",
       "blocks": {
-        "t1": { "type": "testimonial", "settings": { "quote": "Started noticing less shedding around week 6. Genuinely surprised.", "author": "Verified buyer" } },
-        "t2": { "type": "testimonial", "settings": { "quote": "Easy to fit into my morning routine. Doesn't feel like a gimmick.", "author": "Verified buyer" } },
-        "t3": { "type": "testimonial", "settings": { "quote": "Bought the duo pack so my partner and I could both use it.", "author": "Verified buyer" } }
+        "t1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Started noticing less shedding around week 6. Genuinely surprised.",
+            "author": "Verified buyer"
+          }
+        },
+        "t2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Easy to fit into my morning routine. Doesn't feel like a gimmick.",
+            "author": "Verified buyer"
+          }
+        },
+        "t3": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Bought the duo pack so my partner and I could both use it.",
+            "author": "Verified buyer"
+          }
+        }
       },
-      "block_order": ["t1", "t2", "t3"],
+      "block_order": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "settings": {
         "eyebrow": "REAL USERS",
         "heading": "Don't take our word for it"
@@ -129,12 +224,41 @@
     "thrivve_faq": {
       "type": "thrivve-faq",
       "blocks": {
-        "f1": { "type": "faq", "settings": { "question": "How long until I see results?", "answer": "Most users report visible changes between 8-12 weeks of consistent daily use. Hair growth cycles are slow, so consistency matters more than intensity." } },
-        "f2": { "type": "faq", "settings": { "question": "How often should I use it?", "answer": "10 minutes per day is the recommended session length. The cap is designed for daily use." } },
-        "f3": { "type": "faq", "settings": { "question": "Is it safe?", "answer": "Yes. The cap uses low-level red and near-infrared light, the same wavelength ranges used in clinical red light therapy devices." } },
-        "f4": { "type": "faq", "settings": { "question": "Does it work for all hair types?", "answer": "Red light therapy works at the follicle level and is not specific to hair type. Results vary by individual." } }
+        "f1": {
+          "type": "faq",
+          "settings": {
+            "question": "How long until I see results?",
+            "answer": "Most users report visible changes between 8-12 weeks of consistent daily use. Hair growth cycles are slow, so consistency matters more than intensity."
+          }
+        },
+        "f2": {
+          "type": "faq",
+          "settings": {
+            "question": "How often should I use it?",
+            "answer": "10 minutes per day is the recommended session length. The cap is designed for daily use."
+          }
+        },
+        "f3": {
+          "type": "faq",
+          "settings": {
+            "question": "Is it safe?",
+            "answer": "Yes. The cap uses low-level red and near-infrared light, the same wavelength ranges used in clinical red light therapy devices."
+          }
+        },
+        "f4": {
+          "type": "faq",
+          "settings": {
+            "question": "Does it work for all hair types?",
+            "answer": "Red light therapy works at the follicle level and is not specific to hair type. Results vary by individual."
+          }
+        }
       },
-      "block_order": ["f1", "f2", "f3", "f4"],
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "f4"
+      ],
       "settings": {
         "eyebrow": "QUESTIONS",
         "heading": "Everything you need to know"
