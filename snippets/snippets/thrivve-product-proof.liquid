@@ -1,0 +1,94 @@
+{{ 'thrivve-tokens.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .tl-proof {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    margin: 1.2rem 0 1.8rem;
+  }
+
+  .tl-proof__rating {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .tl-proof__stars {
+    color: var(--tl-red, #e8281c);
+    font-size: 1.6rem;
+    letter-spacing: 0.1em;
+    line-height: 1;
+  }
+
+  .tl-proof__rating-text {
+    font-family: var(--tl-font-body, sans-serif);
+    font-size: 1.4rem;
+    color: var(--tl-gray, #6b6b6b);
+  }
+
+  .tl-proof__features {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .tl-proof__features li {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    font-family: var(--tl-font-body, sans-serif);
+    font-size: 1.5rem;
+    color: var(--tl-black, #0a0a0a);
+  }
+
+  .tl-proof__features .tl-dot {
+    background: var(--tl-red, #e8281c);
+    flex-shrink: 0;
+  }
+
+  .tl-proof__stock {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-family: var(--tl-font-body, sans-serif);
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--tl-red, #e8281c);
+    padding-top: 0.4rem;
+    border-top: 1px solid rgba(10,10,10,0.08);
+  }
+
+  .tl-proof__stock-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--tl-red, #e8281c);
+    animation: tl-stock-pulse 1.8s ease-in-out infinite;
+  }
+
+  @keyframes tl-stock-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tl-proof__stock-dot { animation: none; }
+  }
+</style>
+
+<div class="tl-proof">
+  <div class="tl-proof__rating">
+    <span class="tl-proof__stars">★★★★★</span>
+    <span class="tl-proof__rating-text">4.6/5 · based on early customer feedback</span>
+  </div>
+
+  <ul class="tl-proof__features">
+    <li><span class="tl-dot"></span>Easy daily scalp care</li>
+    <li><span class="tl-dot"></span>660nm + 850nm red light therapy</li>
+    <li><span class="tl-dot"></span>Lightweight, hands-free design</li>
+  </ul>
+</div>
