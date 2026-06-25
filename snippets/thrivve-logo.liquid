@@ -1,0 +1,89 @@
+{%- comment -%}
+  Thrivve Labs logo lockup — icon + wordmark, pure SVG/CSS (no image asset required).
+  This file goes in your snippets folder.
+  To use it: open sections/header.liquid, find where the shop name / logo renders,
+  and add this line in its place:
+    {% render 'thrivve-logo' %}
+{%- endcomment -%}
+
+<a href="{{ routes.root_url }}" class="thrivve-logo" aria-label="{{ shop.name }}">
+  <span class="thrivve-logo__mark" aria-hidden="true">
+    <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" class="thrivve-logo__svg">
+      <defs>
+        <linearGradient id="thrivveGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#ff3b30" />
+          <stop offset="100%" stop-color="#ff7a3d" />
+        </linearGradient>
+      </defs>
+      <circle cx="24" cy="24" r="22" fill="none" stroke="url(#thrivveGlow)" stroke-width="2.5" opacity="0.35"/>
+      <path d="M24 8 L24 24 L34 30" stroke="url(#thrivveGlow)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="24" cy="24" r="3.2" fill="url(#thrivveGlow)"/>
+      <path d="M14 36 Q24 30 34 36" stroke="url(#thrivveGlow)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+    </svg>
+  </span>
+  <span class="thrivve-logo__text">
+    <span class="thrivve-logo__primary">THRIVVE</span>
+    <span class="thrivve-logo__secondary">LABS</span>
+  </span>
+</a>
+
+<style>
+  .thrivve-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.9rem;
+    text-decoration: none;
+    color: inherit;
+    line-height: 1;
+  }
+
+  .thrivve-logo__mark {
+    display: inline-flex;
+    flex-shrink: 0;
+  }
+
+  .thrivve-logo__svg {
+    width: 3.2rem;
+    height: 3.2rem;
+    display: block;
+  }
+
+  .thrivve-logo__text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .thrivve-logo__primary {
+    font-family: var(--font-heading-family, inherit);
+    font-weight: 800;
+    font-size: 2rem;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    color: inherit;
+  }
+
+  .thrivve-logo__secondary {
+    font-family: var(--font-heading-family, inherit);
+    font-weight: 500;
+    font-size: 1.05rem;
+    letter-spacing: 0.45em;
+    line-height: 1.3;
+    color: #ff3b30;
+    margin-left: 0.05em;
+  }
+
+  @media screen and (max-width: 749px) {
+    .thrivve-logo__svg {
+      width: 2.6rem;
+      height: 2.6rem;
+    }
+    .thrivve-logo__primary {
+      font-size: 1.6rem;
+    }
+    .thrivve-logo__secondary {
+      font-size: 0.85rem;
+      letter-spacing: 0.35em;
+    }
+  }
+</style>
