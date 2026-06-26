@@ -1,0 +1,155 @@
+/* Thrivve Labs — premium rotating announcement bar */
+
+.thrivve-announcement {
+  width: 100%;
+  position: relative;
+}
+
+.thrivve-announcement--line {
+  border-bottom: 1px solid rgba(var(--color-foreground), 0.08);
+}
+
+.thrivve-announcement__inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  position: relative;
+  padding-top: 0.9rem;
+  padding-bottom: 0.9rem;
+}
+
+.thrivve-announcement__viewport {
+  position: relative;
+  overflow: hidden;
+  flex: 1 1 auto;
+  max-width: 56rem;
+  height: 1.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thrivve-announcement__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.thrivve-announcement__item {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+  pointer-events: none;
+}
+
+.thrivve-announcement__item.is-active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.thrivve-announcement__text {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.thrivve-announcement__link {
+  color: inherit;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.thrivve-announcement__link:hover .thrivve-announcement__text {
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.thrivve-announcement__nav {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border: none;
+  background: transparent;
+  color: currentColor;
+  opacity: 0.6;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  border-radius: 50%;
+  padding: 0;
+}
+
+.thrivve-announcement__nav:hover {
+  opacity: 1;
+  background: rgba(var(--color-foreground), 0.08);
+}
+
+.thrivve-announcement__nav:active {
+  transform: scale(0.9);
+}
+
+.thrivve-announcement__dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding-bottom: 0.6rem;
+}
+
+.thrivve-announcement__dot {
+  width: 0.36rem;
+  height: 0.36rem;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.28;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.thrivve-announcement__dot.is-active {
+  opacity: 0.95;
+  transform: scale(1.25);
+}
+
+@media screen and (max-width: 749px) {
+  .thrivve-announcement__inner {
+    gap: 0.6rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+  .thrivve-announcement__text {
+    font-size: 1.05rem;
+    letter-spacing: 0.02em;
+  }
+  .thrivve-announcement__viewport {
+    max-width: none;
+  }
+  .thrivve-announcement__nav {
+    width: 1.9rem;
+    height: 1.9rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thrivve-announcement__item {
+    transition: opacity 0.2s linear;
+    transform: none;
+  }
+}
