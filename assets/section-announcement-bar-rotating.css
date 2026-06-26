@@ -1,20 +1,36 @@
-.announcement-bar-rotating {
+/* Thrivve Labs — premium rotating announcement bar */
+
+.thrivve-announcement {
   width: 100%;
-  overflow: hidden;
-  background: var(--color-background);
-  color: rgb(var(--color-foreground));
+  position: relative;
 }
 
-.announcement-bar-rotating__track {
-  position: relative;
-  height: 4.4rem;
+.thrivve-announcement--line {
+  border-bottom: 1px solid rgba(var(--color-foreground), 0.08);
+}
+
+.thrivve-announcement__inner {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  gap: 1.2rem;
+  position: relative;
+  padding-top: 0.9rem;
+  padding-bottom: 0.9rem;
 }
 
-.announcement-bar-rotating__list {
+.thrivve-announcement__viewport {
+  position: relative;
+  overflow: hidden;
+  flex: 1 1 auto;
+  max-width: 56rem;
+  height: 1.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thrivve-announcement__list {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -23,94 +39,117 @@
   height: 100%;
 }
 
-.announcement-bar-rotating__item {
+.thrivve-announcement__item {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
-  opacity: 0;
-  transform: translateY(100%);
-  font-size: 1.3rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
   text-align: center;
-  padding: 0 4rem;
-  animation-name: ab-rotate;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+  pointer-events: none;
 }
 
-.announcement-bar-rotating__link {
+.thrivve-announcement__item.is-active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.thrivve-announcement__text {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.thrivve-announcement__link {
   color: inherit;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
 }
 
-.announcement-bar-rotating__link:hover {
+.thrivve-announcement__link:hover .thrivve-announcement__text {
   text-decoration: underline;
+  text-underline-offset: 0.25em;
 }
 
-.announcement-bar-rotating__icon {
-  font-size: 1.4rem;
-  line-height: 1;
+.thrivve-announcement__nav {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border: none;
+  background: transparent;
+  color: currentColor;
+  opacity: 0.6;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  border-radius: 50%;
+  padding: 0;
 }
 
-.announcement-bar-rotating__item:nth-child(1) { animation-delay: 0s; }
-.announcement-bar-rotating__item:nth-child(2) { animation-delay: var(--ab-speed); }
-.announcement-bar-rotating__item:nth-child(3) { animation-delay: calc(var(--ab-speed) * 2); }
-.announcement-bar-rotating__item:nth-child(4) { animation-delay: calc(var(--ab-speed) * 3); }
-.announcement-bar-rotating__item:nth-child(5) { animation-delay: calc(var(--ab-speed) * 4); }
-.announcement-bar-rotating__item:nth-child(6) { animation-delay: calc(var(--ab-speed) * 5); }
-.announcement-bar-rotating__item:nth-child(7) { animation-delay: calc(var(--ab-speed) * 6); }
-.announcement-bar-rotating__item:nth-child(8) { animation-delay: calc(var(--ab-speed) * 7); }
+.thrivve-announcement__nav:hover {
+  opacity: 1;
+  background: rgba(var(--color-foreground), 0.08);
+}
 
-@keyframes ab-rotate {
-  0% {
-    opacity: 0;
-    transform: translateY(60%);
-  }
-  6% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  88% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  94% {
-    opacity: 0;
-    transform: translateY(-60%);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-60%);
-  }
+.thrivve-announcement__nav:active {
+  transform: scale(0.9);
+}
+
+.thrivve-announcement__dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding-bottom: 0.6rem;
+}
+
+.thrivve-announcement__dot {
+  width: 0.36rem;
+  height: 0.36rem;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.28;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.thrivve-announcement__dot.is-active {
+  opacity: 0.95;
+  transform: scale(1.25);
 }
 
 @media screen and (max-width: 749px) {
-  .announcement-bar-rotating__track {
-    height: 5.6rem;
+  .thrivve-announcement__inner {
+    gap: 0.6rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
   }
-  .announcement-bar-rotating__item {
-    font-size: 1.15rem;
-    padding: 0 2rem;
+  .thrivve-announcement__text {
+    font-size: 1.05rem;
+    letter-spacing: 0.02em;
+  }
+  .thrivve-announcement__viewport {
+    max-width: none;
+  }
+  .thrivve-announcement__nav {
+    width: 1.9rem;
+    height: 1.9rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .announcement-bar-rotating__item {
-    animation: none;
-    position: relative;
-    opacity: 1;
+  .thrivve-announcement__item {
+    transition: opacity 0.2s linear;
     transform: none;
-    display: none;
-  }
-  .announcement-bar-rotating__item:first-child {
-    display: flex;
   }
 }
