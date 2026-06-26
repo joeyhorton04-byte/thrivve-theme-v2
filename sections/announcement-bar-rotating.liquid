@@ -1,101 +1,163 @@
-{{ 'section-announcement-bar-rotating.css' | asset_url | stylesheet_tag }}
+{{ 'thrivve-announcement-bar.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
-  assign bar_bg = section.settings.bg_color
-  assign bar_text = section.settings.text_color
-  assign speed = section.settings.rotation_speed | default: 4
+  assign speed = section.settings.change_slides_speed | default: 4
+  assign auto_rotate = section.settings.auto_rotate
+  assign message_count = 0
+  for block in section.blocks
+    if block.type == 'announcement'
+      assign message_count = message_count | plus: 1
+    endif
+  endfor
 -%}
 
-<div class="announcement-bar-rotating color-{{ section.settings.color_scheme }}" style="--ab-speed: {{ speed }}s;">
-  <div class="announcement-bar-rotating__track" role="region" aria-label="{{ 'sections.announcement_bar.label' | t: default: 'Announcement' }}">
-    <ul class="announcement-bar-rotating__list" data-ab-list>
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'message' -%}
-          <li class="announcement-bar-rotating__item" {{ block.shopify_attributes }}>
-            {%- if block.settings.link != blank -%}
-              <a href="{{ block.settings.link }}" class="announcement-bar-rotating__link">
-            {%- endif -%}
+<div
+  class="thrivve-announcement color-{{ section.settings.color_scheme }}{% if section.settings.show_line_separator %} thrivve-announcement--line{% endif %}"
+  style="--tab-speed: {{ speed }}s;"
+  data-thrivve-announcement
+  data-auto-rotate="{{ auto_rotate }}"
+  data-count="{{ message_count }}"
+>
+  <div class="thrivve-announcement__inner page-width">
+    {%- if message_count > 1 -%}
+      <button type="button" class="thrivve-announcement__nav thrivve-announcement__nav--prev" data-ab-prev aria-label="{{ 'general.slider.previous_slide' | t: default: 'Previous announcement' }}">
+        <svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true" focusable="false">
+          <path d="M11 1L4 8l7 7" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    {%- endif -%}
 
-            {%- if block.settings.icon != blank -%}
-              <span class="announcement-bar-rotating__icon" aria-hidden="true">{{ block.settings.icon }}</span>
-            {%- endif -%}
+    <div class="thrivve-announcement__viewport" role="region" aria-label="{{ 'sections.announcement_bar.label' | t: default: 'Announcement' }}">
+      <ul class="thrivve-announcement__list" data-ab-list>
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'announcement' -%}
+            <li class="thrivve-announcement__item{% if forloop.first %} is-active{% endif %}" data-ab-item {{ block.shopify_attributes }}>
+              {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" class="thrivve-announcement__link">{%- endif -%}
+              <span class="thrivve-announcement__text">{{ block.settings.text | escape }}</span>
+              {%- if block.settings.link != blank -%}</a>{%- endif -%}
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </div>
 
-            <span class="announcement-bar-rotating__text">{{ block.settings.text | escape }}</span>
-
-            {%- if block.settings.link != blank -%}
-              </a>
-            {%- endif -%}
-          </li>
-        {%- endif -%}
-      {%- endfor -%}
-    </ul>
+    {%- if message_count > 1 -%}
+      <button type="button" class="thrivve-announcement__nav thrivve-announcement__nav--next" data-ab-next aria-label="{{ 'general.slider.next_slide' | t: default: 'Next announcement' }}">
+        <svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true" focusable="false">
+          <path d="M5 1l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    {%- endif -%}
   </div>
+
+  {%- if message_count > 1 -%}
+    <div class="thrivve-announcement__dots" data-ab-dots aria-hidden="true">
+      {%- for i in (1..message_count) -%}
+        <span class="thrivve-announcement__dot{% if forloop.first %} is-active{% endif %}"></span>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
 </div>
 
-<script src="{{ 'announcement-bar-rotating.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'thrivve-announcement-bar.js' | asset_url }}" defer="defer"></script>
 
 {% schema %}
 {
-  "name": "Rotating announcement bar",
+  "name": "t:sections.announcement-bar.name",
+  "tag": "div",
   "settings": [
     {
       "type": "select",
       "id": "color_scheme",
-      "label": "Color scheme",
+      "label": "t:sections.all.colors.label",
       "options": [
         { "value": "scheme-1", "label": "Scheme 1" },
         { "value": "scheme-2", "label": "Scheme 2" },
         { "value": "scheme-3", "label": "Scheme 3" },
+        { "value": "scheme-4", "label": "Scheme 4" },
+        { "value": "scheme-5", "label": "Scheme 5" },
         { "value": "accent-1", "label": "Accent 1 (red)" },
         { "value": "inverse", "label": "Inverse" }
       ],
-      "default": "accent-1"
+      "default": "scheme-5"
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_rotate",
+      "label": "Auto-rotate messages",
+      "default": true
     },
     {
       "type": "range",
-      "id": "rotation_speed",
-      "label": "Seconds per message",
+      "id": "change_slides_speed",
       "min": 2,
       "max": 10,
-      "step": 0.5,
+      "step": 1,
+      "unit": "s",
+      "label": "Change slides every",
       "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "show_line_separator",
+      "default": false,
+      "label": "t:sections.announcement-bar.settings.show_line_separator.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "default": false,
+      "label": "t:sections.announcement-bar.settings.show_social.label",
+      "info": "t:sections.announcement-bar.settings.show_social.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.header.settings.header__1.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_country_selector",
+      "default": true,
+      "label": "t:sections.header.settings.enable_country_selector.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.header.settings.header__2.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_language_selector",
+      "default": true,
+      "label": "t:sections.header.settings.enable_language_selector.label"
     }
   ],
   "blocks": [
     {
-      "type": "message",
-      "name": "Message",
+      "type": "announcement",
+      "name": "t:sections.announcement-bar.blocks.announcement.name",
       "settings": [
         {
           "type": "text",
           "id": "text",
-          "label": "Message text",
-          "default": "Free worldwide shipping"
-        },
-        {
-          "type": "text",
-          "id": "icon",
-          "label": "Icon (emoji, optional)",
-          "default": ""
+          "default": "Welcome to our store",
+          "label": "t:sections.announcement-bar.blocks.announcement.settings.text.label"
         },
         {
           "type": "url",
           "id": "link",
-          "label": "Link (optional)"
+          "label": "t:sections.announcement-bar.blocks.announcement.settings.link.label"
         }
       ]
     }
   ],
+  "default": {
+    "blocks": [
+      { "type": "announcement" }
+    ]
+  },
   "max_blocks": 8,
-  "presets": [
-    {
-      "name": "Rotating announcement bar",
-      "blocks": [
-        { "type": "message", "settings": { "text": "Free US shipping on every order" } },
-        { "type": "message", "settings": { "text": "30-day money-back guarantee" } },
-        { "type": "message", "settings": { "text": "Limited time: free worldwide shipping" } }
-      ]
-    }
-  ]
+  "enabled_on": {
+    "groups": ["header"]
+  }
 }
 {% endschema %}
