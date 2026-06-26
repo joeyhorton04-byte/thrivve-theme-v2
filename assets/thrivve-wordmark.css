@@ -1,0 +1,45 @@
+/* Thrivve Labs wordmark — single-line stylized text logo (no icon) */
+
+.thrivve-wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  white-space: nowrap;
+  line-height: 1;
+  font-family: var(--font-heading-family, inherit);
+  font-weight: 800;
+  font-size: 2rem;
+  letter-spacing: 0.06em;
+  color: rgb(var(--color-foreground));
+  text-transform: uppercase;
+}
+
+.thrivve-wordmark__accent {
+  margin-left: 0.32em;
+  font-weight: 400;
+  letter-spacing: 0.34em;
+  background: linear-gradient(120deg, #ff3b30, #ff7a3d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #ff3b30; /* fallback for browsers without background-clip:text */
+}
+
+.header__heading-link:hover .thrivve-wordmark {
+  opacity: 0.85;
+}
+
+@media screen and (max-width: 989px) {
+  .thrivve-wordmark {
+    font-size: 1.65rem;
+    letter-spacing: 0.04em;
+  }
+  .thrivve-wordmark__accent {
+    letter-spacing: 0.26em;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .thrivve-wordmark {
+    font-size: 1.35rem;
+  }
+}
