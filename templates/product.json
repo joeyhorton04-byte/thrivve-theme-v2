@@ -24,15 +24,15 @@
           "type": "title",
           "settings": {}
         },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
         "proof": {
           "type": "custom_liquid",
           "settings": {
             "custom_liquid": "{% render 'thrivve-product-proof' %}"
           }
-        },
-        "price": {
-          "type": "price",
-          "settings": {}
         },
         "tiers": {
           "type": "custom_liquid",
@@ -63,8 +63,8 @@
       "block_order": [
         "vendor",
         "title",
-        "proof",
         "price",
+        "proof",
         "tiers",
         "variant_picker",
         "quantity_selector",
