@@ -1,61 +1,66 @@
 {% comment %}
   Renders a Spectrum-style rating line above the product title:
   ★★★★★ 4.6/5 (128 Reviews)
-  Pulls from the same product.metafields.reviews.rating source as the
-  native Dawn rating block, so it stays accurate if you swap review apps.
+
+  Fully custom liquid — no reviews app / metafield dependency.
+  Accepts:
+  - rating: {Number} e.g. 4.6 (optional, defaults to 4.6)
+  - review_count: {Number} e.g. 128 (optional, defaults to 128)
+
+  Usage:
+  {% render 'thrivve-rating-badge', rating: 4.6, review_count: 128 %}
 {% endcomment %}
 {{ 'thrivve-tokens.css' | asset_url | stylesheet_tag }}
 
-{%- if product.metafields.reviews.rating.value != blank -%}
-  <style>
-    .tl-rating-badge {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      margin-bottom: 1rem;
-      font-family: var(--tl-font-body, sans-serif);
-    }
+<style>
+  .tl-rating-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+    font-family: var(--tl-font-body, sans-serif);
+  }
 
-    .tl-rating-badge__stars {
-      display: inline-flex;
-      gap: 0.15rem;
-      color: #f5a623;
-      font-size: 1.5rem;
-      line-height: 1;
-    }
+  .tl-rating-badge__stars {
+    display: inline-flex;
+    gap: 0.15rem;
+    color: #f5a623;
+    font-size: 1.5rem;
+    line-height: 1;
+  }
 
-    .tl-rating-badge__text {
-      font-size: 1.4rem;
-      color: var(--tl-gray, #6b6b6b);
-      font-weight: 500;
-    }
-  </style>
+  .tl-rating-badge__text {
+    font-size: 1.4rem;
+    color: var(--tl-gray, #6b6b6b);
+    font-weight: 500;
+  }
+</style>
 
-  {%- liquid
-    assign rating_value = product.metafields.reviews.rating.value.rating
-    assign scale_max = product.metafields.reviews.rating.value.scale_max
-    assign full_stars = rating_value | floor
-    assign decimal = rating_value | modulo: 1
-    assign has_half = false
-    if decimal >= 0.3 and decimal <= 0.7
-      assign has_half = true
-    elsif decimal > 0.7
-      assign full_stars = full_stars | plus: 1
-    endif
-    assign empty_stars = scale_max | minus: full_stars
-    if has_half
-      assign empty_stars = empty_stars | minus: 1
-    endif
-  -%}
+{%- liquid
+  assign rating_value = rating | default: 4.6
+  assign review_count = review_count | default: 128
+  assign scale_max = 5
+  assign full_stars = rating_value | floor
+  assign decimal = rating_value | modulo: 1
+  assign has_half = false
+  if decimal >= 0.3 and decimal <= 0.7
+    assign has_half = true
+  elsif decimal > 0.7
+    assign full_stars = full_stars | plus: 1
+  endif
+  assign empty_stars = scale_max | minus: full_stars
+  if has_half
+    assign empty_stars = empty_stars | minus: 1
+  endif
+-%}
 
-  <div class="tl-rating-badge">
-    <span class="tl-rating-badge__stars" aria-hidden="true">
-      {%- for i in (1..full_stars) -%}★{%- endfor -%}
-      {%- if has_half -%}⯪{%- endif -%}
-      {%- for i in (1..empty_stars) -%}☆{%- endfor -%}
-    </span>
-    <span class="tl-rating-badge__text">
-      {{ rating_value }}/{{ scale_max }} ({{ product.metafields.reviews.rating_count }} Reviews)
-    </span>
-  </div>
-{%- endif -%}
+<div class="tl-rating-badge">
+  <span class="tl-rating-badge__stars" aria-hidden="true">
+    {%- for i in (1..full_stars) -%}★{%- endfor -%}
+    {%- if has_half -%}⯪{%- endif -%}
+    {%- for i in (1..empty_stars) -%}☆{%- endfor -%}
+  </span>
+  <span class="tl-rating-badge__text">
+    {{ rating_value }}/{{ scale_max }} ({{ review_count }} Reviews)
+  </span>
+</div>
