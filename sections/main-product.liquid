@@ -107,13 +107,61 @@
                     </a>
                   </div>
                 {%- when 'price' -%}
+                  {{ 'thrivve-tokens.css' | asset_url | stylesheet_tag }}
+                  <style>
+                    #price-{{ section.id }} .price__sale {
+                      display: flex;
+                      flex-direction: row-reverse;
+                      align-items: baseline;
+                      gap: 1rem;
+                      justify-content: flex-end;
+                    }
+                    #price-{{ section.id }} .price-item--sale {
+                      color: var(--tl-red, #e8281c);
+                    }
+                    #price-{{ section.id }} .price__badge-sale {
+                      display: none;
+                    }
+                    .tl-save-badge {
+                      display: inline-flex;
+                      align-items: center;
+                      gap: 0.5rem;
+                      font-family: var(--tl-font-body, sans-serif);
+                      font-size: 1.2rem;
+                      font-weight: 700;
+                      letter-spacing: 0.02em;
+                      color: var(--tl-red, #e8281c);
+                      border: 1px solid var(--tl-red, #e8281c);
+                      border-radius: 100px;
+                      padding: 0.35rem 1.1rem 0.35rem 0.9rem;
+                      margin-left: 0.8rem;
+                      vertical-align: middle;
+                    }
+                    .tl-save-badge svg {
+                      width: 11px;
+                      height: 11px;
+                    }
+                  </style>
                   <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                     {%- render 'price',
                       product: product,
                       use_variant: true,
-                      show_badges: true,
+                      show_badges: false,
                       price_class: 'price--large'
                     -%}
+                    {%- liquid
+                      assign variant = product.selected_or_first_available_variant
+                      assign discount_percent = 0
+                      if variant.compare_at_price > variant.price
+                        assign discount_percent = variant.compare_at_price | minus: variant.price | times: 100.0 | divided_by: variant.compare_at_price | round
+                      endif
+                    -%}
+                    {%- if discount_percent > 0 -%}
+                      <span class="tl-save-badge">
+                        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M7 1H2v5l7.5 7.5a1.5 1.5 0 0 0 2.12 0l3.38-3.38a1.5 1.5 0 0 0 0-2.12L7.5 1.5 7 1Z" stroke="currentColor" stroke-width="1.2"/><circle cx="4.5" cy="4.5" r="0.75" fill="currentColor"/></svg>
+                        Save {{ discount_percent }}%
+                      </span>
+                    {%- endif -%}
                   </div>
                   {%- if product.quantity_price_breaks_configured? -%}
                     <div class="volume-pricing-note" id="Volume-Note-{{ section.id }}">
