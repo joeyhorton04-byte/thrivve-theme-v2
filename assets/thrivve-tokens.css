@@ -280,7 +280,7 @@
    PRODUCT FORM — Add to cart button + payment icons row
    ========================================================================== */
 
-.product-form__submit.button--primary {
+.product-form__submit.button {
   background-color: var(--tl-red) !important;
   border-color: var(--tl-red) !important;
   color: var(--tl-white) !important;
@@ -289,13 +289,13 @@
   text-transform: uppercase;
 }
 
-.product-form__submit.button--primary:before,
-.product-form__submit.button--primary:after {
+.product-form__submit.button:before,
+.product-form__submit.button:after {
   box-shadow: none;
-  border-color: var(--tl-red);
+  border-color: var(--tl-red) !important;
 }
 
-.product-form__submit.button--primary:not([disabled]):hover {
+.product-form__submit.button:not([disabled]):hover {
   background-color: var(--tl-red-dim) !important;
   border-color: var(--tl-red-dim) !important;
 }
