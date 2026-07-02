@@ -97,6 +97,10 @@
             {{ form | payment_button }}
           {%- endif -%}
         </div>
+
+        <div class="product-form__payment-icons">
+          {{ shop.enabled_payment_types | payment_type_svg_tag: class: 'payment-icon' }}
+        </div>
       {%- endform -%}
     </product-form>
   {%- else -%}
