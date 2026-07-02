@@ -34,6 +34,17 @@
             "swatch_shape": "circle"
           }
         },
+        "feature_bullets_tEdNVG": {
+          "type": "feature_bullets",
+          "settings": {
+            "bullet_1_icon": "🙌",
+            "bullet_1_text": "Easy daily scalp care",
+            "bullet_2_icon": "💪",
+            "bullet_2_text": "Red light therapy support",
+            "bullet_3_icon": "✨",
+            "bullet_3_text": "Lightweight, hands-free comfort"
+          }
+        },
         "quantity_selector": {
           "type": "quantity_selector",
           "settings": {}
@@ -44,25 +55,14 @@
             "show_dynamic_checkout": true,
             "show_gift_card_recipient": true
           }
-        },
-        "feature_bullets": {
-          "type": "feature_bullets",
-          "settings": {
-            "bullet_1_icon": "\ud83d\ude4c",
-            "bullet_1_text": "Easy daily scalp care",
-            "bullet_2_icon": "\ud83d\udcaa",
-            "bullet_2_text": "660nm + 850nm red light therapy",
-            "bullet_3_icon": "\u2728",
-            "bullet_3_text": "Lightweight, hands-free design"
-          }
         }
       },
       "block_order": [
         "rating_badge_nWNPke",
         "title",
         "price",
-        "feature_bullets",
         "variant_picker",
+        "feature_bullets_tEdNVG",
         "quantity_selector",
         "buy_buttons"
       ],
