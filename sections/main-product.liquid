@@ -116,6 +116,16 @@
                 {%- when 'price' -%}
                   {{ 'thrivve-tokens.css' | asset_url | stylesheet_tag }}
                   <style>
+                    #price-{{ section.id }} {
+                      display: flex;
+                      align-items: center;
+                      flex-wrap: wrap;
+                      gap: 1rem;
+                    }
+                    #price-{{ section.id }} .price {
+                      display: flex;
+                      align-items: baseline;
+                    }
                     #price-{{ section.id }} .price__sale {
                       display: flex;
                       flex-direction: row-reverse;
@@ -141,12 +151,22 @@
                       border: 1px solid var(--tl-red, #e8281c);
                       border-radius: 100px;
                       padding: 0.35rem 1.1rem 0.35rem 0.9rem;
-                      margin-left: 0.8rem;
-                      vertical-align: middle;
+                      white-space: nowrap;
+                      flex-shrink: 0;
                     }
                     .tl-save-badge svg {
                       width: 11px;
                       height: 11px;
+                      flex-shrink: 0;
+                    }
+                    @media screen and (max-width: 400px) {
+                      #price-{{ section.id }} .price {
+                        font-size: 0.9em;
+                      }
+                      .tl-save-badge {
+                        font-size: 1.05rem;
+                        padding: 0.3rem 0.9rem 0.3rem 0.7rem;
+                      }
                     }
                   </style>
                   <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
