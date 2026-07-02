@@ -104,6 +104,51 @@
                       review_count: block.settings.review_count
                     -%}
                   </div>
+                {%- when 'feature_bullets' -%}
+                  {{ 'thrivve-tokens.css' | asset_url | stylesheet_tag }}
+                  <style>
+                    .tl-proof {
+                      display: flex;
+                      flex-direction: column;
+                      gap: 1.6rem;
+                      margin: 1.2rem 0 1.8rem;
+                    }
+                    .tl-proof__features {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                      display: flex;
+                      flex-direction: column;
+                      gap: 0.7rem;
+                    }
+                    .tl-proof__features li {
+                      display: flex;
+                      align-items: center;
+                      gap: 0.9rem;
+                      font-family: var(--tl-font-body, sans-serif);
+                      font-size: 1.5rem;
+                      color: var(--tl-black, #0a0a0a);
+                    }
+                    .tl-proof__features .tl-emoji {
+                      flex-shrink: 0;
+                      font-size: 1.5rem;
+                      line-height: 1;
+                      font-style: normal;
+                    }
+                  </style>
+                  <div class="tl-proof" {{ block.shopify_attributes }}>
+                    <ul class="tl-proof__features">
+                      {%- if block.settings.bullet_1_text != blank -%}
+                        <li><span class="tl-emoji">{{ block.settings.bullet_1_icon }}</span>{{ block.settings.bullet_1_text }}</li>
+                      {%- endif -%}
+                      {%- if block.settings.bullet_2_text != blank -%}
+                        <li><span class="tl-emoji">{{ block.settings.bullet_2_icon }}</span>{{ block.settings.bullet_2_text }}</li>
+                      {%- endif -%}
+                      {%- if block.settings.bullet_3_text != blank -%}
+                        <li><span class="tl-emoji">{{ block.settings.bullet_3_icon }}</span>{{ block.settings.bullet_3_text }}</li>
+                      {%- endif -%}
+                    </ul>
+                  </div>
                 {%- when 'title' -%}
                   <div class="product__title" {{ block.shopify_attributes }}>
                     <h1>{{ product.title | escape }}</h1>
@@ -903,6 +948,49 @@
       "type": "price",
       "name": "t:sections.main-product.blocks.price.name",
       "limit": 1
+    },
+    {
+      "type": "feature_bullets",
+      "name": "Feature Bullets (custom)",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "bullet_1_icon",
+          "label": "Bullet 1 icon (emoji)",
+          "default": "🙌"
+        },
+        {
+          "type": "text",
+          "id": "bullet_1_text",
+          "label": "Bullet 1 text",
+          "default": "Easy daily scalp care"
+        },
+        {
+          "type": "text",
+          "id": "bullet_2_icon",
+          "label": "Bullet 2 icon (emoji)",
+          "default": "💪"
+        },
+        {
+          "type": "text",
+          "id": "bullet_2_text",
+          "label": "Bullet 2 text",
+          "default": "660nm + 850nm red light therapy"
+        },
+        {
+          "type": "text",
+          "id": "bullet_3_icon",
+          "label": "Bullet 3 icon (emoji)",
+          "default": "✨"
+        },
+        {
+          "type": "text",
+          "id": "bullet_3_text",
+          "label": "Bullet 3 text",
+          "default": "Lightweight, hands-free design"
+        }
+      ]
     },
     {
       "type": "sku",
