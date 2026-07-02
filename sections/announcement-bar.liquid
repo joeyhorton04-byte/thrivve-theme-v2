@@ -3,6 +3,8 @@
 {%- liquid
   assign speed = section.settings.change_slides_speed | default: 4
   assign auto_rotate = section.settings.auto_rotate
+  assign layout = section.settings.layout | default: 'slide'
+  assign marquee_speed = section.settings.marquee_speed | default: 25
   assign message_count = 0
   for block in section.blocks
     if block.type == 'announcement'
@@ -11,6 +13,29 @@
   endfor
 -%}
 
+{%- if layout == 'marquee' -%}
+  <div
+    class="thrivve-announcement thrivve-announcement--marquee color-{{ section.settings.color_scheme }}{% if section.settings.show_line_separator %} thrivve-announcement--line{% endif %}"
+    style="--marquee-speed: {{ marquee_speed }}s;"
+  >
+    <div class="thrivve-announcement__marquee-track" aria-hidden="false">
+      {%- comment -%} Repeat the message set 4x for a seamless, gap-free loop {%- endcomment -%}
+      {%- for repeat in (1..4) -%}
+        <div class="thrivve-announcement__marquee-group" {% if repeat > 1 %}aria-hidden="true"{% endif %}>
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'announcement' -%}
+              <span class="thrivve-announcement__marquee-item" {{ block.shopify_attributes }}>
+                {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" class="thrivve-announcement__link">{%- endif -%}
+                <span class="thrivve-announcement__text">{{ block.settings.text | escape }}</span>
+                {%- if block.settings.link != blank -%}</a>{%- endif -%}
+              </span>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+{%- else -%}
 <div
   class="thrivve-announcement color-{{ section.settings.color_scheme }}{% if section.settings.show_line_separator %} thrivve-announcement--line{% endif %}"
   style="--tab-speed: {{ speed }}s;"
@@ -58,14 +83,37 @@
     </div>
   {%- endif -%}
 </div>
+{%- endif -%}
 
-<script src="{{ 'thrivve-announcement-bar.js' | asset_url }}" defer="defer"></script>
+{%- if layout != 'marquee' -%}
+  <script src="{{ 'thrivve-announcement-bar.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
 
 {% schema %}
 {
   "name": "t:sections.announcement-bar.name",
   "tag": "div",
   "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout style",
+      "options": [
+        { "value": "slide", "label": "Slide (fade between messages)" },
+        { "value": "marquee", "label": "Marquee (continuous scroll)" }
+      ],
+      "default": "slide"
+    },
+    {
+      "type": "range",
+      "id": "marquee_speed",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "label": "Marquee scroll speed (lower = faster)",
+      "default": 25
+    },
     {
       "type": "select",
       "id": "color_scheme",
