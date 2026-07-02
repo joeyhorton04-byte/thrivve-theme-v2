@@ -622,6 +622,8 @@
                     section_id: section.id,
                     show_pickup_availability: true
                   -%}
+                {%- when 'review_carousel' -%}
+                  {%- render 'thrivve-review-carousel', block: block, section_id: section.id -%}
                 {%- when 'rating' -%}
                   {%- if product.metafields.reviews.rating.value != blank -%}
                     <div class="rating-wrapper">
@@ -1129,6 +1131,33 @@
           "label": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.label",
           "info": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.info"
         }
+      ]
+    },
+    {
+      "type": "review_carousel",
+      "name": "Review Carousel",
+      "limit": 1,
+      "settings": [
+        { "type": "header", "content": "Review 1" },
+        { "type": "textarea", "id": "quote_1", "label": "Quote", "default": "I've never bought anything from social media before, but this was worth it. After a month, my hair actually feels a bit thicker!" },
+        { "type": "text", "id": "author_1", "label": "Author", "default": "Jamie R." },
+        { "type": "range", "id": "rating_1", "label": "Rating", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "header", "content": "Review 2" },
+        { "type": "textarea", "id": "quote_2", "label": "Quote", "default": "" },
+        { "type": "text", "id": "author_2", "label": "Author", "default": "" },
+        { "type": "range", "id": "rating_2", "label": "Rating", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "header", "content": "Review 3" },
+        { "type": "textarea", "id": "quote_3", "label": "Quote", "default": "" },
+        { "type": "text", "id": "author_3", "label": "Author", "default": "" },
+        { "type": "range", "id": "rating_3", "label": "Rating", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "header", "content": "Review 4" },
+        { "type": "textarea", "id": "quote_4", "label": "Quote", "default": "" },
+        { "type": "text", "id": "author_4", "label": "Author", "default": "" },
+        { "type": "range", "id": "rating_4", "label": "Rating", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "header", "content": "Review 5" },
+        { "type": "textarea", "id": "quote_5", "label": "Quote", "default": "" },
+        { "type": "text", "id": "author_5", "label": "Author", "default": "" },
+        { "type": "range", "id": "rating_5", "label": "Rating", "min": 1, "max": 5, "step": 1, "default": 5 }
       ]
     },
     {
