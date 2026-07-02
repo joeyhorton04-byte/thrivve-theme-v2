@@ -275,3 +275,41 @@
   background: var(--tl-red);
   flex-shrink: 0;
 }
+
+/* ==========================================================================
+   PRODUCT FORM — Add to cart button + payment icons row
+   ========================================================================== */
+
+.product-form__submit.button--primary {
+  background-color: var(--tl-red) !important;
+  border-color: var(--tl-red) !important;
+  color: var(--tl-white) !important;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.product-form__submit.button--primary:before,
+.product-form__submit.button--primary:after {
+  box-shadow: none;
+  border-color: var(--tl-red);
+}
+
+.product-form__submit.button--primary:not([disabled]):hover {
+  background-color: var(--tl-red-dim) !important;
+  border-color: var(--tl-red-dim) !important;
+}
+
+.product-form__payment-icons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1.2rem;
+}
+
+.product-form__payment-icons .payment-icon {
+  height: 2.4rem;
+  width: auto;
+  border-radius: 4px;
+}
