@@ -19,14 +19,6 @@
             "review_count": 228
           }
         },
-        "vendor": {
-          "type": "text",
-          "disabled": true,
-          "settings": {
-            "text": "{{ product.vendor }}",
-            "text_style": "uppercase"
-          }
-        },
         "title": {
           "type": "title",
           "settings": {}
@@ -34,13 +26,6 @@
         "price": {
           "type": "price",
           "settings": {}
-        },
-        "tiers": {
-          "type": "custom_liquid",
-          "disabled": true,
-          "settings": {
-            "custom_liquid": "{% render 'thrivve-product-tiers' %}"
-          }
         },
         "variant_picker": {
           "type": "variant_picker",
@@ -63,10 +48,8 @@
       },
       "block_order": [
         "rating_badge_nWNPke",
-        "vendor",
         "title",
         "price",
-        "tiers",
         "variant_picker",
         "quantity_selector",
         "buy_buttons"
