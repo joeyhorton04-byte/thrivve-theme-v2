@@ -28,12 +28,6 @@
           "type": "price",
           "settings": {}
         },
-        "proof": {
-          "type": "custom_liquid",
-          "settings": {
-            "custom_liquid": "{% render 'thrivve-product-proof' %}"
-          }
-        },
         "tiers": {
           "type": "custom_liquid",
           "disabled": true,
@@ -64,7 +58,6 @@
         "vendor",
         "title",
         "price",
-        "proof",
         "tiers",
         "variant_picker",
         "quantity_selector",
