@@ -99,7 +99,9 @@
         </div>
 
         <div class="product-form__payment-icons">
-          {{ shop.enabled_payment_types | payment_type_svg_tag: class: 'payment-icon' }}
+          {%- for type in shop.enabled_payment_types -%}
+            {{ type | payment_type_svg_tag: class: 'icon icon--full-color payment-icon' }}
+          {%- endfor -%}
         </div>
       {%- endform -%}
     </product-form>
