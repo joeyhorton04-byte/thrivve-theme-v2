@@ -12,6 +12,13 @@
     "main": {
       "type": "main-product",
       "blocks": {
+        "rating_badge_nWNPke": {
+          "type": "rating_badge",
+          "settings": {
+            "rating": 4.6,
+            "review_count": 128
+          }
+        },
         "vendor": {
           "type": "text",
           "disabled": true,
@@ -55,6 +62,7 @@
         }
       },
       "block_order": [
+        "rating_badge_nWNPke",
         "vendor",
         "title",
         "price",
