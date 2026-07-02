@@ -1,0 +1,172 @@
+{% comment %}
+  Renders a compact single-review carousel for the product page.
+  Accepts:
+  - block: {Object} the review_carousel block, with quote_1..5 / author_1..5 / rating_1..5 settings
+  - section_id: {String} id of the section this snippet belongs to
+
+  Usage:
+  {%- render 'thrivve-review-carousel', block: block, section_id: section.id -%}
+{% endcomment %}
+
+{{ 'thrivve-tokens.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign reviews = ''
+  assign review_count = 0
+-%}
+
+<div
+  class="tl-review-carousel"
+  data-review-carousel
+  id="ReviewCarousel-{{ section_id }}"
+  {{ block.shopify_attributes }}
+>
+  {%- for i in (1..5) -%}
+    {%- assign quote_key = 'quote_' | append: i -%}
+    {%- assign author_key = 'author_' | append: i -%}
+    {%- assign rating_key = 'rating_' | append: i -%}
+    {%- assign quote = block.settings[quote_key] -%}
+    {%- assign author = block.settings[author_key] -%}
+    {%- assign rating = block.settings[rating_key] -%}
+
+    {%- if quote != blank -%}
+      {%- assign review_count = review_count | plus: 1 -%}
+      <div class="tl-review-carousel__slide" {% unless forloop.first %}hidden{% endunless %}>
+        <p class="tl-review-carousel__quote">{{ quote }}</p>
+        <div class="tl-review-carousel__meta">
+          <span class="tl-review-carousel__author">{{ author }}</span>
+          <span class="tl-review-carousel__stars" aria-hidden="true">
+            {%- for star in (1..5) -%}
+              {%- if star <= rating -%}★{%- else -%}☆{%- endif -%}
+            {%- endfor -%}
+          </span>
+        </div>
+      </div>
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- if review_count > 1 -%}
+    <div class="tl-review-carousel__controls">
+      <button type="button" class="tl-review-carousel__arrow" data-review-prev aria-label="Previous review">‹</button>
+      <div class="tl-review-carousel__dots" data-review-dots>
+        {%- for i in (1..review_count) -%}
+          <button
+            type="button"
+            class="tl-review-carousel__dot{% if forloop.first %} is-active{% endif %}"
+            data-review-dot
+            aria-label="Go to review {{ forloop.index }}"
+          ></button>
+        {%- endfor -%}
+      </div>
+      <button type="button" class="tl-review-carousel__arrow" data-review-next aria-label="Next review">›</button>
+    </div>
+  {%- endif -%}
+</div>
+
+<style>
+  .tl-review-carousel {
+    margin-top: 1.6rem;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--tl-border-dark);
+  }
+
+  .tl-review-carousel__quote {
+    font-family: var(--tl-font-body);
+    font-size: 1.5rem;
+    line-height: 1.55;
+    color: var(--tl-black);
+    margin: 0 0 1rem;
+  }
+
+  .tl-review-carousel__meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .tl-review-carousel__author {
+    font-family: var(--tl-font-body);
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--tl-gray);
+  }
+
+  .tl-review-carousel__stars {
+    color: #f5a623;
+    font-size: 1.4rem;
+    letter-spacing: 0.1em;
+  }
+
+  .tl-review-carousel__controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.6rem;
+    margin-top: 1.6rem;
+  }
+
+  .tl-review-carousel__arrow {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--tl-gray);
+    padding: 0.4rem 0.8rem;
+  }
+
+  .tl-review-carousel__arrow:hover {
+    color: var(--tl-black);
+  }
+
+  .tl-review-carousel__dots {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .tl-review-carousel__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--tl-border-dark);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .tl-review-carousel__dot.is-active {
+    background: var(--tl-black);
+  }
+</style>
+
+<script>
+  (function () {
+    var root = document.getElementById('ReviewCarousel-{{ section_id }}');
+    if (!root) return;
+
+    var slides = root.querySelectorAll('.tl-review-carousel__slide');
+    var dots = root.querySelectorAll('[data-review-dot]');
+    var prevBtn = root.querySelector('[data-review-prev]');
+    var nextBtn = root.querySelector('[data-review-next]');
+    var current = 0;
+
+    function show(index) {
+      if (index < 0) index = slides.length - 1;
+      if (index >= slides.length) index = 0;
+      current = index;
+      slides.forEach(function (slide, i) {
+        slide.hidden = i !== current;
+      });
+      dots.forEach(function (dot, i) {
+        dot.classList.toggle('is-active', i === current);
+      });
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', function () { show(current - 1); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { show(current + 1); });
+    dots.forEach(function (dot, i) {
+      dot.addEventListener('click', function () { show(i); });
+    });
+  })();
+</script>
