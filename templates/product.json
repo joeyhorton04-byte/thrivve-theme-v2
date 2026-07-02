@@ -55,6 +55,24 @@
             "show_dynamic_checkout": true,
             "show_gift_card_recipient": true
           }
+        },
+        "collapsible_tab_mm6TQh": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "What's included in the Package",
+            "icon": "box",
+            "content": "",
+            "page": ""
+          }
+        },
+        "collapsible_tab_nwjQMW": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Collapsible row",
+            "icon": "truck",
+            "content": "",
+            "page": ""
+          }
         }
       },
       "block_order": [
@@ -64,7 +82,9 @@
         "variant_picker",
         "feature_bullets_tEdNVG",
         "quantity_selector",
-        "buy_buttons"
+        "buy_buttons",
+        "collapsible_tab_mm6TQh",
+        "collapsible_tab_nwjQMW"
       ],
       "settings": {
         "enable_sticky_info": true,
