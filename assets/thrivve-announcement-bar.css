@@ -155,3 +155,64 @@
     transform: none;
   }
 }
+
+/* Marquee layout — continuous horizontal scroll, Spectrum-style */
+.thrivve-announcement--marquee {
+  overflow: hidden;
+  padding: 0.9rem 0;
+}
+
+.thrivve-announcement__marquee-track {
+  display: flex;
+  width: max-content;
+  animation: thrivve-marquee-scroll var(--marquee-speed, 25s) linear infinite;
+}
+
+.thrivve-announcement__marquee-group {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.thrivve-announcement__marquee-item {
+  display: inline-flex;
+  align-items: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding: 0 2.4rem;
+  position: relative;
+}
+
+.thrivve-announcement__marquee-item + .thrivve-announcement__marquee-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+@keyframes thrivve-marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-25%); }
+}
+
+@media screen and (max-width: 749px) {
+  .thrivve-announcement__marquee-item {
+    font-size: 1.05rem;
+    padding: 0 1.6rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thrivve-announcement__marquee-track {
+    animation: none;
+  }
+}
