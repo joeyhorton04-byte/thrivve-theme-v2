@@ -142,15 +142,17 @@
                     .tl-save-badge {
                       display: inline-flex;
                       align-items: center;
-                      gap: 0.5rem;
+                      gap: 0.4rem;
                       font-family: var(--tl-font-body, sans-serif);
-                      font-size: 1.2rem;
+                      font-size: 1.15rem;
                       font-weight: 700;
                       letter-spacing: 0.02em;
-                      color: var(--tl-red, #e8281c);
-                      border: 1px solid var(--tl-red, #e8281c);
+                      text-transform: uppercase;
+                      color: #ffffff;
+                      background: var(--tl-red, #e8281c);
+                      border: none;
                       border-radius: 100px;
-                      padding: 0.35rem 1.1rem 0.35rem 0.9rem;
+                      padding: 0.4rem 1.1rem 0.4rem 0.9rem;
                       white-space: nowrap;
                       flex-shrink: 0;
                     }
@@ -158,6 +160,7 @@
                       width: 11px;
                       height: 11px;
                       flex-shrink: 0;
+                      color: #ffffff;
                     }
                     @media screen and (max-width: 400px) {
                       #price-{{ section.id }} .price {
@@ -185,7 +188,7 @@
                     -%}
                     {%- if discount_percent > 0 -%}
                       <span class="tl-save-badge">
-                        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M7 1H2v5l7.5 7.5a1.5 1.5 0 0 0 2.12 0l3.38-3.38a1.5 1.5 0 0 0 0-2.12L7.5 1.5 7 1Z" stroke="currentColor" stroke-width="1.2"/><circle cx="4.5" cy="4.5" r="0.75" fill="currentColor"/></svg>
+                        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M7.41 1.59A2 2 0 0 0 6 1H3a2 2 0 0 0-2 2v3a2 2 0 0 0 .59 1.41l7 7a2 2 0 0 0 2.82 0l3-3a2 2 0 0 0 0-2.82l-7-7ZM4.5 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></svg>
                         Save {{ discount_percent }}%
                       </span>
                     {%- endif -%}
