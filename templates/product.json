@@ -58,17 +58,10 @@
             "show_dynamic_checkout": true,
             "show_gift_card_recipient": true
           }
-        },
-        "rating_badge": {
-          "type": "custom_liquid",
-          "settings": {
-            "custom_liquid": "{% render 'thrivve-rating-badge' %}"
-          }
         }
       },
       "block_order": [
         "vendor",
-        "rating_badge",
         "title",
         "price",
         "proof",
