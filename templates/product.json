@@ -52,27 +52,12 @@
             "show_dynamic_checkout": true,
             "show_gift_card_recipient": true
           }
-        },
-        "rating_badge": {
-          "type": "rating_badge",
-          "settings": {
-            "rating": 4.6,
-            "review_count": 128
-          }
-        },
-        "proof": {
-          "type": "custom_liquid",
-          "settings": {
-            "custom_liquid": "{% render 'thrivve-product-proof' %}"
-          }
         }
       },
       "block_order": [
         "vendor",
-        "rating_badge",
         "title",
         "price",
-        "proof",
         "tiers",
         "variant_picker",
         "quantity_selector",
@@ -252,6 +237,13 @@
     "thrivve_testimonials_iaebQz": {
       "type": "thrivve-testimonials",
       "blocks": {
+        "testimonial_YFcfmc": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Started noticing less shedding around week 6. Genuinely surprised.",
+            "author": "Verified buyer"
+          }
+        },
         "testimonial_JiJRLM": {
           "type": "testimonial",
           "settings": {
@@ -275,6 +267,7 @@
         }
       },
       "block_order": [
+        "testimonial_YFcfmc",
         "testimonial_JiJRLM",
         "testimonial_JRHyyY",
         "testimonial_PQH9Pg"
